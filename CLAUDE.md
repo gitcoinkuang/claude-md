@@ -185,6 +185,25 @@ CI/CD配置 - requirements.txt - pyproject.toml - setup.py -
 -   除非明确要求，否则不要引入 React、Vue、Next.js 等前端框架
 -   API 接口可以作为前端的数据交互方式存在，但不能替代完整的 Web 页面
 
+## FastAPI 安全规范
+
+- 生产环境默认关闭 FastAPI 自动文档：
+  - 禁止暴露 `/docs`
+  - 禁止暴露 `/redoc`
+  - 禁止暴露 `/openapi.json`
+- 如果需要 API 文档调试，必须：
+  - 使用环境变量控制开启
+
+示例：
+
+```python
+app = FastAPI(
+    docs_url=None,
+    redoc_url=None,
+    openapi_url=None
+)
+```
+
 # 代码检查
 
 输出代码前必须检查：

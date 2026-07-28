@@ -176,6 +176,11 @@ except:
 CI/CD配置 - requirements.txt - pyproject.toml - setup.py -
 多文件项目结构
 
+# FastAPI
+
+-   当我明确要求使用FastAPI的时候，采用FastAPI + Uvicorn + Jinja2的架构
+-   如果是非常简单的页面可以不使用Jinja2，但必须保证有前端，我不需要纯后端api
+
 # 代码检查
 
 输出代码前必须检查：

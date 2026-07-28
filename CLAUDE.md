@@ -178,8 +178,12 @@ CI/CD配置 - requirements.txt - pyproject.toml - setup.py -
 
 # FastAPI
 
--   当我明确要求使用FastAPI的时候，采用FastAPI + Uvicorn + Jinja2的架构
--   如果是非常简单的页面可以不使用Jinja2，但必须保证有前端，我不需要纯后端api
+-   当我明确要求使用 FastAPI 时，默认采用 FastAPI + Uvicorn + Jinja2 + HTMX 架构
+-   项目必须包含 Web 前端界面，不允许只生成纯后端 API 服务
+-   优先使用 Jinja2 进行服务端模板渲染，使用 HTMX 实现页面动态交互，减少不必要的 JavaScript 代码
+-   如果页面非常简单，可以不使用 Jinja2，但仍必须提供可访问的 HTML 前端页面
+-   除非明确要求，否则不要引入 React、Vue、Next.js 等前端框架
+-   API 接口可以作为前端的数据交互方式存在，但不能替代完整的 Web 页面
 
 # 代码检查
 

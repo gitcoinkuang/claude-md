@@ -96,11 +96,33 @@ RichHandler(markup=True)
 
 # 环境变量规范
 
-如果需要： - API Key - Token - Cookie - 密码 - 私密配置
+如果需要： - API Key - Token - Cookie - 密码 - 私密配置/开关
 
-必须： - 写入 .env - 使用环境变量读取
+必须： - 写入 .env - 自动检测并读取当前工作目录下的 .env 文件写入 os.environ
 
-禁止： - 硬编码敏感信息 - 日志输出敏感数据 - 提交 .env 文件
+自动加载范式（优先标准库，避免强依赖 python-dotenv）：
+
+```python
+def _load_dotenv(env_path: str = ".env") -> None:
+    if not os.path.exists(env_path):
+        return
+    try:
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, val = line.split("=", 1)
+                key, val = key.strip(), val.strip().strip("'\"")
+                if key and key not in os.environ:
+                    os.environ[key] = val
+    except Exception:
+        pass
+
+_load_dotenv()
+```
+
+禁止： - 只使用 os.getenv() 而不自动加载 .env - 硬编码敏感信息 - 日志输出敏感数据 - 提交 .env 文件
 
 # 修改已有代码原则
 

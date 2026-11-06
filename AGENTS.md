@@ -121,7 +121,7 @@ Docker、CI/CD、Kubernetes、微服务拆分、数据库设计、前端框架�
 ## CLI
 
 - 默认使用标准库 `flag`；子命令很多（约 5 个以上）时才考虑 cobra。
-- 必须支持 `--help`、`--version`、`--config`；版本号通过 `-ldflags "-X main.version=..."` 注入（`var version = "dev"`）。
+- 必须支持 `--help`、`--version`、`--config`。
 - 批量处理、网络扫描、文件处理、数据转换等长任务必须显示进度（进度条或状态输出，写 stderr）。
 
 ## Web 与 API
